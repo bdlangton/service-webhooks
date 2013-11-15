@@ -36,6 +36,9 @@ if (isset($config['redis_password']) && !$config['redis_password'] == '') {
     $REDIS_BACKEND = 'redis://redis:' . $config['redis_password'] . '@' . $config['redis_host'];
     Resque::setBackend($REDIS_BACKEND);
 }
+elseif (isset($config['redis_host'])) {
+    Resque::setBackend($config['redis_host'] . ':6379');
+}
 $logLevel = 0;
 $LOGGING = getenv('LOGGING');
 $VERBOSE = getenv('VERBOSE');
